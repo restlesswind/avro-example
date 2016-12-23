@@ -10,18 +10,19 @@ import javax.persistence.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AppTest {
 
-	EntityManagerFactory emf;
-	EntityManager em;
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
 	
+	EntityManagerFactory emf = ctx.getBean(EntityManagerFactory.class);
+	EntityManager em = emf.createEntityManager();
+
 	@Before
 	public void clearDb() {
-        emf = Persistence.createEntityManagerFactory("ogm-neo4j");
-        em = emf.createEntityManager();
-        
+       
         
 /*        em.getTransaction().begin();
         
@@ -62,25 +63,24 @@ public class AppTest {
 		Employer nokia = new Employer("Nokia");
 		Employer ibm = new Employer("ibm");
 		
+		
+        em.persist(mike);
+        em.persist(jian);
+        em.persist(john);
+        em.persist(ted);
 		em.persist(nokia);
 		em.persist(ibm);
 		
 		nokia.addEmployee(jian);
 		nokia.addEmployee(mike);
 
-		ibm.addEmployee(john);
+		//ibm.addEmployee(john);
 		ibm.addEmployee(ted);
+		john.worksFor(ibm);
 		
         mike.worksWith(jian);
-        jian.worksWith(mike);
-        
-		
-        em.persist(mike);
-        em.persist(jian);
-        em.persist(john);
-        em.persist(ted);
-		
-        
+        //jian.worksWith(mike);
+
         em.flush();
         em.getTransaction().commit();
         em.clear();
@@ -106,9 +106,12 @@ public class AppTest {
         
 	}
 	
+
+	
 	@After
 	public void cleanUp()
 	{
+
         em.close();
         emf.close();
 	}

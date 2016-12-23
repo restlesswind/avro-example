@@ -2,21 +2,15 @@ package com.rw.examples.hibernate_ogm_neo4j;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table (name="Employer")
-public class Employer {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class Employer extends AbstractEntity{
 	
 	private String name;
 	
@@ -45,7 +39,7 @@ public class Employer {
 
 	@Override
 	public String toString() {
-		return "Company [name=" + name + "]";
+		return "Company [id=" + getId() + ", name=" + name + "]" + " employees: " + employees.stream().map(e->e.getName()).collect(Collectors.joining(","));
 	}
 	
 	

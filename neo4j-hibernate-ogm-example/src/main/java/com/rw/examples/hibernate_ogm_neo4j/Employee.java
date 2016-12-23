@@ -1,26 +1,17 @@
 package com.rw.examples.hibernate_ogm_neo4j;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
 @Entity
-public class Employee {
+public class Employee extends AbstractEntity {
 
-	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
 	private String name;
 	
 	@OneToOne
@@ -48,9 +39,8 @@ public class Employee {
 	}
 	
 	public String toString() {
-		return this.name + "'s teammates => "
-				+ Optional.ofNullable(this.teammates).orElse(Collections.emptySet())
-				.stream().map(person->person.getClass()).collect(Collectors.toList());
+		return this.name + " id " + getId() + " works for " + employer.getName() + " and has teammates => "
+				+ teammates.stream().map(e->e.getName()).collect(Collectors.joining(","));
 	}
 
 	public String getName() {
