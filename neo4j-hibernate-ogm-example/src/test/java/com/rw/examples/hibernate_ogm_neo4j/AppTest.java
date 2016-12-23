@@ -32,7 +32,7 @@ public class AppTest {
         em.getTransaction().commit();
         em.clear();*/
         
-        List<Company> companyList;
+        List<Employer> employerList;
         List<Employee> employeeList;
         Query query;
         
@@ -42,10 +42,10 @@ public class AppTest {
         System.out.println("Delete Employee:" + employeeList.size());
         employeeList.stream().forEach(e->em.remove(e));
         
-        query = em.createQuery("from Company c");
-        companyList = query.getResultList();
-        System.out.println("Delete Company:" + companyList.size());
-        companyList.stream().forEach(e->em.remove(e));
+        query = em.createQuery("from Employer e");
+        employerList = query.getResultList();
+        System.out.println("Delete Employer:" + employerList.size());
+        employerList.stream().forEach(e->em.remove(e));
 
         em.getTransaction().commit();
 	}
@@ -59,8 +59,8 @@ public class AppTest {
         Employee ted = new Employee("Ted"); 
 
         
-		Company nokia = new Company("Nokia");
-		Company ibm = new Company("ibm");
+		Employer nokia = new Employer("Nokia");
+		Employer ibm = new Employer("ibm");
 		
 		em.persist(nokia);
 		em.persist(ibm);
@@ -88,7 +88,7 @@ public class AppTest {
         em.getTransaction().begin();
         
         
-        List<Company> companyList;
+        List<Employer> employerList;
         List<Employee> employeeList;
         Query query;
         
@@ -97,10 +97,10 @@ public class AppTest {
         System.out.println("Employee:" + employeeList.size());
         employeeList.stream().forEach(e->System.out.println(e.toString()));
         
-        query = em.createQuery("from Company c");
-        companyList = query.getResultList();
-        System.out.println("Company:" + companyList.size());
-        companyList.stream().forEach(e->System.out.println(e.toString()));
+        query = em.createQuery("from Employer e");
+        employerList = query.getResultList();
+        System.out.println("Employer:" + employerList.size());
+        employerList.stream().forEach(e->System.out.println(e.toString()));
         
         em.getTransaction().commit();
         

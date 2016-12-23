@@ -1,9 +1,7 @@
 package com.rw.examples.hibernate_ogm_neo4j;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,7 +24,7 @@ public class Employee {
 	private String name;
 	
 	@OneToOne
-	public Company company;
+	public Employer employer;
 	
 	private Employee() {
 		
@@ -45,9 +42,9 @@ public class Employee {
 		teammates.add(person);
 	}
 	
-	public void worksFor(Company company)
+	public void worksFor(Employer e)
 	{
-		this.company = company;
+		this.employer = e;
 	}
 	
 	public String toString() {

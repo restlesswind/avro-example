@@ -8,9 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Company {
+@Table (name="Employer")
+public class Employer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,12 +20,12 @@ public class Company {
 	
 	private String name;
 	
-	@OneToMany(mappedBy = "company")
+	@OneToMany(mappedBy = "employer")
     private Set<Employee> employees = new HashSet<Employee>();
 	
-	private Company() {}
+	private Employer() {}
 	
-	public Company(String name) {
+	public Employer(String name) {
 		this.name = name;
 	}
 
