@@ -47,6 +47,7 @@ public class AppTest {
         Employee mike = new Employee("Mike");
         Employee jian = new Employee("Jian"); 
         Employee john = new Employee("John"); 
+        Employee ted = new Employee("Ted"); 
 
         
 		Company nokia = new Company("Nokia");
@@ -59,6 +60,7 @@ public class AppTest {
 		nokia.addEmployee(mike);
 
 		ibm.addEmployee(john);
+		ibm.addEmployee(ted);
 		
         mike.worksWith(jian);
         jian.worksWith(mike);
@@ -67,6 +69,7 @@ public class AppTest {
         em.persist(mike);
         em.persist(jian);
         em.persist(john);
+        em.persist(ted);
 		
         
         em.flush();
