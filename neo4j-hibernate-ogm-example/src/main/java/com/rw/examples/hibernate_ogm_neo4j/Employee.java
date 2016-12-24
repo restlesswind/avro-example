@@ -17,7 +17,7 @@ public class Employee extends AbstractEntity {
 	@OneToOne
 	public Employer employer;
 	
-	private Employee() {
+	protected Employee() {
 		
 	}
 	

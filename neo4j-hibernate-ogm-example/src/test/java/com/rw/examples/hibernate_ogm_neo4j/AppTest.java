@@ -35,9 +35,11 @@ public class AppTest {
         
         List<Employer> employerList;
         List<Employee> employeeList;
+        
         Query query;
         
         em.getTransaction().begin();
+
         query = em.createQuery("from Employee e");
         employeeList = query.getResultList();
         System.out.println("Delete Employee:" + employeeList.size());
@@ -47,6 +49,8 @@ public class AppTest {
         employerList = query.getResultList();
         System.out.println("Delete Employer:" + employerList.size());
         employerList.stream().forEach(e->em.remove(e));
+        
+
 
         em.getTransaction().commit();
 	}
@@ -63,6 +67,7 @@ public class AppTest {
 		Employer nokia = new Employer("Nokia");
 		Employer ibm = new Employer("ibm");
 		
+		Manager boss = new Manager("Boss");
 		
         em.persist(mike);
         em.persist(jian);
@@ -70,6 +75,7 @@ public class AppTest {
         em.persist(ted);
 		em.persist(nokia);
 		em.persist(ibm);
+		em.persist(boss);
 		
 		nokia.addEmployee(jian);
 		nokia.addEmployee(mike);
@@ -77,6 +83,11 @@ public class AppTest {
 		//ibm.addEmployee(john);
 		ibm.addEmployee(ted);
 		john.worksFor(ibm);
+		boss.worksFor(ibm);
+		
+		boss.manages(ted);
+		boss.manages(john);
+		
 		
         mike.worksWith(jian);
         //jian.worksWith(mike);
@@ -101,6 +112,7 @@ public class AppTest {
         employerList = query.getResultList();
         System.out.println("Employer:" + employerList.size());
         employerList.stream().forEach(e->System.out.println(e.toString()));
+        
         
         em.getTransaction().commit();
         
