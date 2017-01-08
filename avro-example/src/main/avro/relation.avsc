@@ -1,0 +1,38 @@
+[
+{	"name": "OpType", 
+	"type" : "enum", 
+	"symbols": ["SET", "UPDATE"]
+}
+,
+
+{	"name": "Op", 
+	"type" : "enum", 
+	"symbols": ["ADD", "DELETE"]
+}
+,
+
+{
+    "name":"Relation",
+    "type":"record",
+    "fields":[
+        {"name": "fqdn", "type":"string"},
+        {"name": "op", "type": "Op"}
+    ]
+}
+,
+
+{
+	"name": "RelationSet",
+	"type":"record",
+	"fields":[
+    	{
+        "name":"relations",
+        "type":{
+            "type": "array",  
+            "items": "Relation"
+            }
+    	},
+    	{"name": "opType", "type": "OpType"}
+	] 
+}
+]
